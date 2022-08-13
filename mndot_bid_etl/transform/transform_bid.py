@@ -3,15 +3,13 @@ import pandas as pd
 from mndot_bid_etl.extract.abstract import Abstract
 
 
-def get_column_names_containing_string(
-    df: pd.DataFrame, search_strings: list[str]
-) -> list[str]:
-    drop_columns = []
-    for column_name in df.columns.to_list():
+def find_all_columns(df: pd.DataFrame, search_strings: list[str]) -> list[str]:
+    matching_columns = []
+    for column in df.columns.to_list():
         for substring in search_strings:
-            if substring in column_name:
-                drop_columns.append(column_name)
-    return drop_columns
+            if substring in column:
+                matching_columns.append(column)
+    return matching_columns
 
 
 def rename_bid_columns(column_name: str) -> str:
@@ -71,9 +69,7 @@ def get_transformed_bid_df(abstract: Abstract) -> pd.DataFrame:
         "UnitName",
         "Ext",
     ]
-    columns_to_drop = get_column_names_containing_string(
-        bid_df_raw, drop_column_names_containing
-    )
+    columns_to_drop = find_all_columns(bid_df_raw, drop_column_names_containing)
     bid_df_dropped = bid_df_raw.drop(columns=columns_to_drop)
 
     # Rename remaining columns
