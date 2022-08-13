@@ -8,10 +8,12 @@ authors = ["depowered <dpwr16@gmail.com>"]
 python = "^3.10"
 requests = "^2.28.1"
 beautifulsoup4 = "^4.11.1"
+pandas = "^1.4.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
 black= "^22.6.0"
+ipykernel = "^6.15.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
