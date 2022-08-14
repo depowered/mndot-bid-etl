@@ -1,6 +1,6 @@
 from typing import Callable
 import pandas as pd
-from mndot_bid_etl.extract.abstract import Abstract
+from mndot_bid_etl.transform.abstract import Abstract
 
 
 def find_all_columns(df: pd.DataFrame, search_strings: list[str]) -> list[str]:

@@ -1,5 +1,5 @@
 import pandas as pd
-from mndot_bid_etl.extract.abstract import Abstract
+from mndot_bid_etl.transform.abstract import Abstract
 
 
 def rename_contract_columns(df: pd.DataFrame, mapper: dict[str, str]) -> pd.DataFrame:

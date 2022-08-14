@@ -20,14 +20,14 @@ class Abstract:
         return self.bidder_df.at[0, "Bidder Number"]
 
 
-def split_csv(csv_file) -> list[str]:
+def split_csv(csv_file: Path) -> list[str]:
     """Splits the csv data by blank lines to divide into its three subtables"""
     blank_line_regex = r"(?:\r?\n){2,}"
     with open(csv_file, "r") as f:
         return re.split(blank_line_regex, f.read())
 
 
-def read_csv(csv_file: Path) -> Abstract:
+def read_abstract_csv(csv_file: Path) -> Abstract:
     contract_data, bid_data, bidder_data = split_csv(csv_file)
 
     return Abstract(
