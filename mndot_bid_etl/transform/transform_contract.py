@@ -1,7 +1,15 @@
 import pandas as pd
 
 
-def rename_contract_columns(df: pd.DataFrame, mapper: dict[str, str]) -> pd.DataFrame:
+def rename_contract_columns(df: pd.DataFrame) -> pd.DataFrame:
+    mapper = {
+        "Letting Date": "letting_date",
+        "Job Description": "description",
+        "Contract Id": "id",
+        "SP Number": "sp_number",
+        "District": "district",
+        "County": "county",
+    }
     return df.rename(columns=mapper)
 
 
@@ -22,18 +30,10 @@ def assign_spec_year(df: pd.DataFrame, spec_year: int) -> pd.DataFrame:
 def transform_contract_df(
     df: pd.DataFrame, winning_bidder_id: str, spec_year: int
 ) -> pd.DataFrame:
-    mapper = {
-        "Letting Date": "letting_date",
-        "Job Description": "description",
-        "Contract Id": "id",
-        "SP Number": "sp_number",
-        "District": "district",
-        "County": "county",
-    }
 
     return (
         df.pipe(cast_contract_astype)
-        .pipe(rename_contract_columns, mapper=mapper)
+        .pipe(rename_contract_columns)
         .pipe(assign_winning_bidder_id, winning_bidder_id=winning_bidder_id)
         .pipe(assign_spec_year, spec_year=spec_year)
     )
