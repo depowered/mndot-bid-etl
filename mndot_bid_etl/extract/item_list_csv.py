@@ -13,7 +13,7 @@ def fetch_item_list_csv(year: int) -> str:
         "__VIEWSTATEGENERATOR": "115E9492",
         "__EVENTVALIDATION": "/wEdAAlQLBtT5HVTDC4gDKSIpUwT6XUEVaVArTknM/AIWiCmfySb5Jo7EHUVWCUvRhlv/0AwqNmbkwlGkLb4J9MVp7aV2ihq8vT00whimHTWykdtvW4wVUxmqwHa7Jm3PxNshdFi6UFpibrPn/7jjn5BJwDecJsAD0Rh1DuNbxILM//pi4Sh4NK+piAusjW3zkSES+tAvW/ivrFDJbxZdS8szCbf3qMj1DXo0Q3R5WedzM+BZw==",
         "ctl00$MainContent$txtDescr": "",
-        "ctl00$MainContent$rdSpecYear": str(year),
+        "ctl00$MainContent$rdSpecYear": str(year)[2:],  # "2018" -> "18"
     }
 
     try:
