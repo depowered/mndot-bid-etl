@@ -1,1 +1,1 @@
-Run the script extract/download_csv.py to populate the csv subfolders.
+Run the script download_data.py to populate the csv subfolders.
