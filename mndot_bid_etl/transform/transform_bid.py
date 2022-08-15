@@ -1,19 +1,23 @@
 from typing import Callable
 import pandas as pd
 
-# ---------- Drop Functions ----------
-def generate_drop_column_list(df: pd.DataFrame, search_strings: list[str]) -> list[str]:
-    matching_columns = []
-    for column in df.columns.to_list():
-        for substring in search_strings:
-            if substring in column:
-                matching_columns.append(column)
-    return matching_columns
+# ---------- Filter Column Functions ----------
+def generate_filter_bid_column_list(df: pd.DataFrame) -> list[str]:
+    # Add static column names
+    filter_columns = ["ItemNumber", "Quantity"]
+
+    # Add dynamic column names containing "(Unit Price)"
+    substring = "(Unit Price)"
+    df_columns = df.columns.to_list()
+    dynamic_columns = [column for column in df_columns if substring in column]
+    filter_columns += dynamic_columns
+
+    return filter_columns
 
 
-def drop_bid_columns(df: pd.DataFrame, search_strings: list[str]) -> pd.DataFrame:
-    drop_columns = generate_drop_column_list(df, search_strings)
-    return df.drop(columns=drop_columns)
+def filter_bid_columns(df: pd.DataFrame) -> pd.DataFrame:
+    filter_columns = generate_filter_bid_column_list(df)
+    return df.filter(items=filter_columns, axis="columns")
 
 
 # ---------- Rename Functions ----------
@@ -82,19 +86,8 @@ def assign_contract_id(df: pd.DataFrame, contract_id: str) -> pd.DataFrame:
 
 # ---------- Transform Pipeline ----------
 def transform_bid_df(df: pd.DataFrame, contract_id: str) -> pd.DataFrame:
-    # Drop unnecessary columns
-    search_strings = [
-        "ContractId",
-        "SectionDescription",
-        "LineNumber",
-        "ItemDescription",
-        "UnitPrice",
-        "UnitName",
-        "Ext",
-    ]
-
     return (
-        df.pipe(drop_bid_columns, search_strings)
+        df.pipe(filter_bid_columns)
         .pipe(rename_bid_columns)
         .pipe(format_bid_values)
         .pipe(melt_bid_df)
