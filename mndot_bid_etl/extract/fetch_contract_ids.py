@@ -1,12 +1,12 @@
+from pathlib import Path
 import re
 import requests
 from bs4 import BeautifulSoup
 
 
-REQUEST_URL = "https://transport.dot.state.mn.us/PostLetting/Abstract.aspx"
+def request_letting_abstract_html(year: int) -> str:
+    url = "https://transport.dot.state.mn.us/PostLetting/Abstract.aspx"
 
-
-def get_post_letting_abstract_html(year: int) -> str:
     # The payload below was copied from the post request after navigating to the target page manually
     payload = {
         "__EVENTTARGET": "ctl00$MainContent$drpPage",
@@ -21,11 +21,16 @@ def get_post_letting_abstract_html(year: int) -> str:
         "ctl00$MainContent$drpPage": "20000",
     }
 
-    r = requests.post(url=REQUEST_URL, data=payload)
+    try:
+        r = requests.post(url=url, data=payload)
+        r.raise_for_status()
+    except requests.exceptions.RequestException as e:
+        raise e
+
     return r.text
 
 
-def get_ids_from_html(html: str) -> list[str]:
+def parse_contract_ids(html: str) -> list[str]:
     soup = BeautifulSoup(html, "html.parser")
 
     # Get a list of all anchor tags for the Abstract (CSV)
@@ -38,5 +43,33 @@ def get_ids_from_html(html: str) -> list[str]:
 
 
 def get_contract_ids(year: int) -> list[str]:
-    html = get_post_letting_abstract_html(year)
-    return get_ids_from_html(html)
+    html = request_letting_abstract_html(year)
+    return parse_contract_ids(html)
+
+
+def fetch_abstract_csv_content(contract_id: str) -> str:
+    base_url = (
+        "http://transport.dot.state.mn.us/PostLetting/abstractCSV.aspx?ContractId="
+    )
+    url = base_url + contract_id
+
+    try:
+        r = requests.get(url)
+        r.raise_for_status()
+    except requests.exceptions.RequestException as e:
+        raise e
+
+    return r.text
+
+
+def download_abstract_csv(contract_id: str, download_dir: Path) -> None:
+    file_name = f"{contract_id}.csv"
+    file_path = download_dir / file_name
+
+    # Check if file already exists
+    if file_path.is_file():
+        return
+
+    csv_text = fetch_abstract_csv_content(contract_id)
+    with open(file_path, "w") as f:
+        f.write(csv_text)
