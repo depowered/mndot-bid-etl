@@ -11,6 +11,10 @@ class Abstract:
     bid_df: pd.DataFrame
     bidder_df: pd.DataFrame
 
+    def __post_init__(self) -> int:
+        # TODO: Write an actual method for determining spec year
+        self.spec_year = 2001
+
     @property
     def contract_id(self) -> str:
         return self.contract_df.at[0, "Contract Id"]

@@ -1,5 +1,4 @@
 import pandas as pd
-from mndot_bid_etl.transform.abstract import Abstract
 
 
 def rename_contract_columns(df: pd.DataFrame, mapper: dict[str, str]) -> pd.DataFrame:
@@ -10,12 +9,19 @@ def assign_winning_bidder_id(df: pd.DataFrame, winning_bidder_id: str) -> pd.Dat
     return df.assign(winning_bidder_id=winning_bidder_id)
 
 
+def cast_contract_astype(df: pd.DataFrame) -> pd.DataFrame:
+    dtype = {"Letting Date": "datetime64[ns]"}
+    return df.astype(dtype)
+
+
 # TODO: Implement an method for determining the spec year from the abstract content
 def assign_spec_year(df: pd.DataFrame, spec_year: int) -> pd.DataFrame:
     return df.assign(spec_year=spec_year)
 
 
-def transform_contract_df(abstract: Abstract) -> pd.DataFrame:
+def transform_contract_df(
+    df: pd.DataFrame, winning_bidder_id: str, spec_year: int
+) -> pd.DataFrame:
     mapper = {
         "Letting Date": "letting_date",
         "Job Description": "description",
@@ -24,10 +30,10 @@ def transform_contract_df(abstract: Abstract) -> pd.DataFrame:
         "District": "district",
         "County": "county",
     }
-    df = abstract.contract_df
 
     return (
-        df.pipe(rename_contract_columns, mapper=mapper)
-        .pipe(assign_winning_bidder_id, winning_bidder_id=abstract.winning_bidder_id)
-        .pipe(assign_spec_year, spec_year=2001)
+        df.pipe(cast_contract_astype)
+        .pipe(rename_contract_columns, mapper=mapper)
+        .pipe(assign_winning_bidder_id, winning_bidder_id=winning_bidder_id)
+        .pipe(assign_spec_year, spec_year=spec_year)
     )
