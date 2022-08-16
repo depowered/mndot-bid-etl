@@ -23,12 +23,12 @@ def cast_contract_astype(df: pd.DataFrame) -> pd.DataFrame:
 
 
 # TODO: Implement an method for determining the spec year from the abstract content
-def assign_spec_year(df: pd.DataFrame, spec_year: int) -> pd.DataFrame:
+def assign_spec_year(df: pd.DataFrame, spec_year: str) -> pd.DataFrame:
     return df.assign(spec_year=spec_year)
 
 
 def transform_contract_df(
-    df: pd.DataFrame, winning_bidder_id: str, spec_year: int
+    df: pd.DataFrame, winning_bidder_id: str, spec_year: str
 ) -> pd.DataFrame:
 
     return (
