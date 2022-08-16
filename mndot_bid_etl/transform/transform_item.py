@@ -30,7 +30,12 @@ def rename_item_columns(df: pd.DataFrame) -> pd.DataFrame:
 # ---------- Format Functions ----------
 def format_item_values(df: pd.DataFrame) -> pd.DataFrame:
     formatted_df = df.copy()
-    formatted_df["spec_year"] = formatted_df["spec_year"].apply(lambda x: int("20" + x))
+    formatted_df["spec_year"] = (
+        formatted_df["spec_year"].apply(lambda x: "20" + x).astype("string")
+    )
+    # formatted_df = formatted_df.applymap(str.strip)
+    for column in formatted_df.columns.to_list():
+        formatted_df[column] = formatted_df[column].str.strip()
     return formatted_df
 
 
