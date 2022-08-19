@@ -24,7 +24,7 @@ class ItemList:
         )
 
     def _generate_compound_ids(self, df: pd.DataFrame) -> pd.Series:
-        return df["id"] + " " + df["long_description"]
+        return df["id"] + "_" + df["long_description"]
 
     def _generate_compound_id_matrix(self) -> pd.DataFrame:
         compound_id_2020 = self._generate_compound_ids(self.item_2020_df)
@@ -58,12 +58,12 @@ class ItemList:
 
 def read_item_list_csv(csv_file: Path) -> ItemList:
     with open(csv_file, "r") as f:
-        return pd.read_csv(f, dtype="string")
+        return pd.read_csv(f, dtype="string", quotechar="'")
 
 
 def generate_item_list(
     item_list_2016_csv: Path, item_list_2018_csv: Path, item_list_2020_csv: Path
-) -> pd.DataFrame:
+) -> ItemList:
     return ItemList(
         item_2016_df=transform_item_df(read_item_list_csv(item_list_2016_csv)),
         item_2018_df=transform_item_df(read_item_list_csv(item_list_2018_csv)),

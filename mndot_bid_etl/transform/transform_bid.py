@@ -4,7 +4,7 @@ import pandas as pd
 # ---------- Filter Column Functions ----------
 def generate_filter_bid_column_list(df: pd.DataFrame) -> list[str]:
     # Add static column names
-    filter_columns = ["ItemNumber", "Quantity"]
+    filter_columns = ["ItemNumber", "ItemDescription", "Quantity"]
 
     # Add dynamic column names containing "(Unit Price)"
     substring = "(Unit Price)"
@@ -31,6 +31,8 @@ def generate_rename_column_mapper(df: pd.DataFrame) -> dict[str, str]:
         match column:
             case "ItemNumber":
                 mapper[column] = "item_id"
+            case "ItemDescription":
+                mapper[column] = "long_description"
             case "Quantity":
                 mapper[column] = "quantity"
             case other:
@@ -46,6 +48,10 @@ def rename_bid_columns(df: pd.DataFrame) -> pd.DataFrame:
 # ---------- Format Functions ----------
 def format_item_id(id: str) -> str:
     return id[:4] + "." + id[4:]
+
+
+def format_long_description(long_description: str) -> str:
+    return long_description.strip().replace("''", '"')
 
 
 def format_quantity(quantity: str) -> float:
@@ -64,6 +70,8 @@ def format_bid_values(df: pd.DataFrame) -> pd.DataFrame:
         match column_name:
             case "item_id":
                 format_function = format_item_id
+            case "long_description":
+                format_function = format_long_description
             case "quantity":
                 format_function = format_quantity
             case other:
@@ -75,7 +83,9 @@ def format_bid_values(df: pd.DataFrame) -> pd.DataFrame:
 # ---------- Reshape Functions ----------
 def melt_bid_df(df: pd.DataFrame) -> pd.DataFrame:
     return df.melt(
-        id_vars=["item_id", "quantity"], var_name="bidder_id", value_name="unit_price"
+        id_vars=["item_id", "long_description", "quantity"],
+        var_name="bidder_id",
+        value_name="unit_price",
     )
 
 

@@ -36,6 +36,9 @@ def format_item_values(df: pd.DataFrame) -> pd.DataFrame:
     # formatted_df = formatted_df.applymap(str.strip)
     for column in formatted_df.columns.to_list():
         formatted_df[column] = formatted_df[column].str.strip()
+    formatted_df["long_description"] = formatted_df["long_description"].str.replace(
+        ";", ","
+    )
     return formatted_df
 
 

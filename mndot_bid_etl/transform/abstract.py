@@ -3,6 +3,7 @@ import pandas as pd
 from dataclasses import dataclass
 from pathlib import Path
 from io import StringIO
+from datetime import date
 
 
 @dataclass
@@ -23,6 +24,14 @@ class Abstract:
     def winning_bidder_id(self) -> str:
         return self.bidder_df.at[0, "Bidder Number"]
 
+    @property
+    def letting_date(self) -> date:
+        return (
+            self.contract_df.astype({"Letting Date": "datetime64[ns]"})
+            .at[0, "Letting Date"]
+            .date()
+        )
+
 
 def split_csv(csv_file: Path) -> list[str]:
     """Splits the csv data by blank lines to divide into its three subtables"""
@@ -35,7 +44,9 @@ def read_abstract_csv(csv_file: Path) -> Abstract:
     contract_data, bid_data, bidder_data = split_csv(csv_file)
 
     return Abstract(
-        contract_df=pd.read_csv(StringIO(contract_data), dtype="object"),
-        bid_df=pd.read_csv(StringIO(bid_data), dtype="object"),
-        bidder_df=pd.read_csv(StringIO(bidder_data), dtype="object"),
+        contract_df=pd.read_csv(
+            StringIO(contract_data), dtype="object", escapechar="\\"
+        ),
+        bid_df=pd.read_csv(StringIO(bid_data), dtype="object", escapechar="\\"),
+        bidder_df=pd.read_csv(StringIO(bidder_data), dtype="object", escapechar="\\"),
     )
