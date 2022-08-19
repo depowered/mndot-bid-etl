@@ -5,7 +5,7 @@ from mndot_bid_etl.extract.abstract_csv import download_abstract_csv, get_contra
 from mndot_bid_etl.extract.item_list_csv import download_item_list_csv
 
 
-DOWNLOAD_DIR = Path("./mndot_bid_etl/data/csv").resolve()
+DOWNLOAD_DIR = Path("./data/csv").resolve()
 ABSTRACT_CSV_YEARS = [2022, 2020, 2019, 2018]
 ITEM_LIST_YEARS = [2016, 2018, 2020]
 
