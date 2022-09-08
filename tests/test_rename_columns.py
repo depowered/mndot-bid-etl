@@ -1,6 +1,6 @@
 from mndot_bid_etl.transform.transformation import RenaneColumns
 
-from tests import test_abstract
+from tests import test_abstract, test_items
 
 
 def test_rename_columns_on_bid_df() -> None:
@@ -76,6 +76,57 @@ def test_rename_columns_on_contract_df() -> None:
         "sp_number",
         "district",
         "county",
+    ]
+
+    assert result_column_names == expected_column_names
+
+
+def test_rename_columns_on_item_df() -> None:
+    df = test_items.copy()
+
+    rename_map = {
+        "Item Number": lambda _: "id",
+        "Short Description": lambda _: "description",
+        "Long Description": lambda _: "long_description",
+        "Unit Name": lambda _: "unit",
+        "Plan Unit Description": lambda _: "unit_description",
+        "Spec Year": lambda _: "spec_year",
+    }
+
+    rename_columns = RenaneColumns(rename_map)
+    renamed_df = rename_columns.apply(df)
+    result_column_names = renamed_df.columns.to_list()
+
+    expected_column_names = [
+        "id",
+        "description",
+        "long_description",
+        "unit",
+        "unit_description",
+        "spec_year",
+        "Unnamed: 6",
+    ]
+
+    assert result_column_names == expected_column_names
+
+
+def test_rename_columns_with_no_matches() -> None:
+    df = test_items.copy()
+
+    rename_map = {"NonMatchingText1": lambda _: None}
+
+    rename_columns = RenaneColumns(rename_map)
+    renamed_df = rename_columns.apply(df)
+    result_column_names = renamed_df.columns.to_list()
+
+    expected_column_names = [
+        "Item Number",
+        "Short Description",
+        "Long Description",
+        "Unit Name",
+        "Plan Unit Description",
+        "Spec Year",
+        "Unnamed: 6",
     ]
 
     assert result_column_names == expected_column_names
