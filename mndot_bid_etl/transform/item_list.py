@@ -56,7 +56,7 @@ class ItemList:
         return unique_compound_ids
 
 
-def read_item_list_csv(csv_file: Path) -> ItemList:
+def read_item_list_csv(csv_file: Path) -> pd.DataFrame:
     with open(csv_file, "r") as f:
         return pd.read_csv(f, dtype="string", quotechar="'")
 
