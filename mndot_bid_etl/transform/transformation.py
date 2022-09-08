@@ -45,8 +45,20 @@ class RenaneColumns:
 class FilterColumns:
     filter_list: list[str]
 
-    def apply(df: pd.DataFrame) -> pd.DataFrame:
-        raise NotImplementedError()
+    def apply(self, df: pd.DataFrame) -> pd.DataFrame:
+        # Intialize an empty items list
+        items: list[str] = []
+
+        # Iterate over each column of the input dataframe
+        for column in df.columns.to_list():
+            for search_string in self.filter_list:
+                # Determine if the column label matches a string in filter_list
+                if search_string in column:
+                    # Append matching column labels to items list
+                    items.append(column)
+
+        # Execute the df.filter() method
+        return df.filter(items=items)
 
 
 class DType(Enum):
