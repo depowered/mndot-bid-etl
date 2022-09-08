@@ -43,6 +43,15 @@ class RenaneColumns:
 
 @dataclass
 class FilterColumns:
+    """
+    Provides a pipeable apply method that filters dataframe columns based on the provided list of search strings.
+
+    Parameters
+    ----------
+    filter_list : list `[search_string]`
+        search_string : matches to column labels by the pattern `search_string in label == True`
+    """
+
     filter_list: list[str]
 
     def apply(self, df: pd.DataFrame) -> pd.DataFrame:
