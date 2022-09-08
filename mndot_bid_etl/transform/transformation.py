@@ -13,6 +13,16 @@ class Transformation(Protocol):
 
 @dataclass
 class RenaneColumns:
+    """
+    Provides a pipeable apply method that alters column labels based on the provided rename_map.
+
+    Parameters
+    ----------
+    rename_map : dict `{ search_string : rename_func }`
+        search_string : matches to column labels by the pattern `search_string in label == True`
+        rename_func : function that receives the existing column label and returns the renamed column label
+    """
+
     rename_map: dict[str, Callable[[str], str]]
 
     def apply(self, df: pd.DataFrame) -> pd.DataFrame:
