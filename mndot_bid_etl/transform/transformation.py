@@ -87,6 +87,7 @@ class CastColumns:
     ----------
     fuzzy_dtype_map : dict of search_string -> DType
         search_string : matches to column labels by the pattern `search_string in label == True`
+        DType : Enum representing pandas compatible data types
     """
 
     fuzzy_dtype_map: dict[str, DType]
@@ -109,10 +110,37 @@ class CastColumns:
 
 @dataclass
 class ModifyValues:
-    format_map: dict[str, Callable[[Any], Any]]
+    """
+    Provides a pipeable apply method that transforms dataframe values based on
+    column-to-function mappings provided in fuzzy_modify_map.
+
+    Parameters
+    ----------
+    fuzzy_modify_map : dict of search_string -> modify_func
+        search_string : matches to column labels by the pattern `search_string in label == True`
+        modify_func : function to use for transforming the data
+    """
+
+    fuzzy_modify_map: dict[str, Callable[[Any], Any]]
 
     def apply(self, df: pd.DataFrame) -> pd.DataFrame:
-        raise NotImplementedError()
+        # Initialize an empty dataframe to store output columns
+        out_df = pd.DataFrame()
+
+        # Iterate over each column of the input dataframe
+        for column in df.columns.to_list():
+            # Get the matching function from the fuzzy_modify_map
+            for search_string, modify_func in self.fuzzy_modify_map.items():
+                # If there is a matching function, and append it to the output dataframe
+                if search_string in column:
+                    out_df[column] = df[column].apply(modify_func)
+                    break
+            # Else append the unmodified column to the output dataframe
+            if column not in out_df.columns:
+                out_df[column] = df[column]
+
+        # Return the output dataframe
+        return out_df
 
 
 @dataclass
@@ -122,4 +150,6 @@ class Melt:
     value_name: str
 
     def apply(self, df: pd.DataFrame) -> pd.DataFrame:
-        raise NotImplementedError()
+        return df.melt(
+            id_vars=self.id_vars, var_name=self.value_name, value_name=self.value_name
+        )
