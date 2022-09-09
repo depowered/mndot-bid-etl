@@ -1,7 +1,6 @@
-from typing import Callable
 from functools import reduce
 import pandas as pd
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 from .transformation import TransformationFunction
 
