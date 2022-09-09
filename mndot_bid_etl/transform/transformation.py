@@ -4,6 +4,9 @@ from typing import Any, Callable, Protocol
 import pandas as pd
 
 
+TransformationFunction = Callable[[pd.DataFrame], pd.DataFrame]
+
+
 class Transformation(Protocol):
     """Applies a pipeable, column-wise pandas.DataFrame method."""
 
@@ -151,5 +154,5 @@ class Melt:
 
     def apply(self, df: pd.DataFrame) -> pd.DataFrame:
         return df.melt(
-            id_vars=self.id_vars, var_name=self.value_name, value_name=self.value_name
+            id_vars=self.id_vars, var_name=self.var_name, value_name=self.value_name
         )
