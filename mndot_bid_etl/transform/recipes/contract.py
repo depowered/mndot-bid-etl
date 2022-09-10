@@ -1,34 +1,38 @@
 from mndot_bid_etl.transform.transformer import Transformer
 from mndot_bid_etl.transform.transformation import (
     DType,
-    FilterColumns,
     RenaneColumns,
     CastColumns,
 )
 
 
 # ---------- Define Transformations ----------
-filter_columns = FilterColumns(fuzzy_filter_list=["Bidder Number", "Bidder Name"])
-
 rename_columns = RenaneColumns(
     fuzzy_rename_map={
-        "Bidder Number": lambda _: "id",
-        "Bidder Name": lambda _: "name",
+        "Letting Date": lambda _: "letting_date",
+        "Job Description": lambda _: "description",
+        "Contract Id": lambda _: "id",
+        "SP Number": lambda _: "sp_number",
+        "District": lambda _: "district",
+        "County": lambda _: "county",
     }
 )
 
 cast_columns = CastColumns(
     fuzzy_dtype_map={
+        "letting_date": DType.DATE,
+        "description": DType.STRING,
         "id": DType.STRING,
-        "name": DType.STRING,
+        "sp_number": DType.STRING,
+        "district": DType.STRING,
+        "county": DType.STRING,
     }
 )
 
 
 # ---------- Construct Transformer ----------
-bidder_transformer = Transformer(
+contract_transformer = Transformer(
     transformation_functions=[
-        filter_columns.apply,
         rename_columns.apply,
         cast_columns.apply,
     ]

@@ -77,7 +77,7 @@ cast_columns = CastColumns(
 )
 
 
-# ---------- Construct Bid Transformer ----------
+# ---------- Construct Transformer ----------
 bid_transformer = Transformer(
     transformation_functions=[
         filter_columns.apply,
