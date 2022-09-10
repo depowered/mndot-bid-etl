@@ -1,4 +1,5 @@
-from mndot_bid_etl.transform.transformation import CastColumns, DType
+from mndot_bid_etl.transform.transformation import CastColumns
+from mndot_bid_etl.dtype import DType
 
 from tests import test_abstract
 

@@ -1,7 +1,8 @@
 from dataclasses import dataclass
-from enum import Enum
 from typing import Any, Callable, Protocol
 import pandas as pd
+
+from mndot_bid_etl.dtype import DType
 
 
 TransformationFunction = Callable[[pd.DataFrame], pd.DataFrame]
@@ -74,14 +75,6 @@ class FilterColumns:
 
         # Execute the df.filter() method
         return df.filter(items=items)
-
-
-class DType(Enum):
-    STRING = "string"
-    INT64 = "int64"
-    FLOAT64 = "float64"
-    BOOL = "boolean"
-    DATE = "datetime64[ns]"
 
 
 @dataclass
