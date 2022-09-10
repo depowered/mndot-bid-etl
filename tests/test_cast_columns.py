@@ -27,6 +27,6 @@ def test_cast_columns_with_no_matches() -> None:
     casted_df = cast_columns.apply(df)
     resulting_dtype = casted_df["Letting Date"].dtype
 
-    expected_dtype = "object"
+    expected_dtype = DType.OBJECT.value
 
     assert resulting_dtype == expected_dtype

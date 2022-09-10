@@ -7,3 +7,4 @@ class DType(Enum):
     FLOAT64 = "float64"
     BOOL = "boolean"
     DATE = "datetime64[ns]"
+    OBJECT = "object"
