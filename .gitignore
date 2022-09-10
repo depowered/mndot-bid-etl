@@ -4,8 +4,5 @@ __pycache__/
 *$py.class
 .pytest_cache
 
-# VS Code Settings
-.vscode/
-
 # CSV files
 *.csv
