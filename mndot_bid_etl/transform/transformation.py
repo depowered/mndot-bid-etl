@@ -1,9 +1,8 @@
 from dataclasses import dataclass
 from typing import Any, Callable, Protocol
+
 import pandas as pd
-
 from mndot_bid_etl.dtype import DType
-
 
 TransformationFunction = Callable[[pd.DataFrame], pd.DataFrame]
 
@@ -13,6 +12,10 @@ class Transformation(Protocol):
 
     def apply(self, df: pd.DataFrame) -> pd.DataFrame:
         """Returns a transformed dataframe."""
+        ...
+
+
+RenameColumnsMapping = dict[str, str | Callable[[str], str]]
 
 
 @dataclass
@@ -27,7 +30,7 @@ class RenaneColumns:
         rename_func : function that receives the existing column label and returns the renamed column label
     """
 
-    fuzzy_rename_map: dict[str, str | Callable[[str], str]]
+    fuzzy_rename_map: RenameColumnsMapping
 
     def apply(self, df: pd.DataFrame) -> pd.DataFrame:
         # Initialized an empty columns dict of structure {old_column_name: new_column_name}
@@ -77,6 +80,9 @@ class FilterColumns:
         return df.filter(items=items)
 
 
+CastColumnsMapping = dict[str, DType]
+
+
 @dataclass
 class CastColumns:
     """
@@ -89,7 +95,7 @@ class CastColumns:
         DType : Enum representing pandas compatible data types
     """
 
-    fuzzy_dtype_map: dict[str, DType]
+    fuzzy_dtype_map: CastColumnsMapping
 
     def apply(self, df: pd.DataFrame) -> pd.DataFrame:
         # Intialize an empty dtype dict of structure {column_label: DType.value}
@@ -107,6 +113,9 @@ class CastColumns:
         return df.astype(dtype=dtype)
 
 
+ModifyValuesMapping = dict[str, Callable[[Any], Any]]
+
+
 @dataclass
 class ModifyValues:
     """
@@ -120,7 +129,7 @@ class ModifyValues:
         modify_func : function to use for transforming the data
     """
 
-    fuzzy_modify_map: dict[str, Callable[[Any], Any]]
+    fuzzy_modify_map: ModifyValuesMapping
 
     def apply(self, df: pd.DataFrame) -> pd.DataFrame:
         # Initialize an empty dataframe to store output columns

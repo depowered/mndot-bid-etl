@@ -1,10 +1,10 @@
-from mndot_bid_etl.transform.transformation import ModifyValues
 from mndot_bid_etl.transform.recipes.bid import (
     format_item_id,
     format_long_description,
-    format_quantity,
     format_price,
+    format_quantity,
 )
+from mndot_bid_etl.transform.transformation import ModifyValues
 
 from tests import test_abstract
 

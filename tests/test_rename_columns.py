@@ -1,4 +1,4 @@
-from mndot_bid_etl.transform.transformation import RenaneColumns
+from mndot_bid_etl.transform.transformation import RenameColumnsMapping, RenaneColumns
 
 from tests import test_abstract, test_items
 
@@ -6,7 +6,7 @@ from tests import test_abstract, test_items
 def test_rename_columns_on_bid_df() -> None:
     df = test_abstract.bid_df.copy()
 
-    rename_map = {
+    rename_map: RenameColumnsMapping = {
         "ItemNumber": "item_id",
         "ItemDescription": "long_description",
         "Quantity": lambda x: x.lower(),
@@ -15,7 +15,7 @@ def test_rename_columns_on_bid_df() -> None:
 
     rename_columns = RenaneColumns(rename_map)
     renamed_df = rename_columns.apply(df)
-    result_column_names = renamed_df.columns.to_list()
+    result_column_names: list[str] = renamed_df.columns.to_list()
 
     expected_column_names = [
         "ContractId",
@@ -42,11 +42,14 @@ def test_rename_columns_on_bid_df() -> None:
 def test_rename_columns_on_bidder_df() -> None:
     df = test_abstract.bidder_df.copy()
 
-    rename_map = {"Bidder Number": "id", "Bidder Name": "name"}
+    rename_map: RenameColumnsMapping = {
+        "Bidder Number": "id",
+        "Bidder Name": "name",
+    }
 
     rename_columns = RenaneColumns(rename_map)
     renamed_df = rename_columns.apply(df)
-    result_column_names = renamed_df.columns.to_list()
+    result_column_names: list[str] = renamed_df.columns.to_list()
 
     expected_column_names = ["id", "name", "Bidder Amount"]
 
@@ -56,7 +59,7 @@ def test_rename_columns_on_bidder_df() -> None:
 def test_rename_columns_on_contract_df_with_functions() -> None:
     df = test_abstract.contract_df.copy()
 
-    rename_map = {
+    rename_map: RenameColumnsMapping = {
         "Letting Date": lambda _: "letting_date",
         "Job Description": lambda _: "description",
         "Contract Id": lambda _: "id",
@@ -67,7 +70,7 @@ def test_rename_columns_on_contract_df_with_functions() -> None:
 
     rename_columns = RenaneColumns(rename_map)
     renamed_df = rename_columns.apply(df)
-    result_column_names = renamed_df.columns.to_list()
+    result_column_names: list[str] = renamed_df.columns.to_list()
 
     expected_column_names = [
         "letting_date",
@@ -84,7 +87,7 @@ def test_rename_columns_on_contract_df_with_functions() -> None:
 def test_rename_columns_on_contract_df_with_string_mapping() -> None:
     df = test_abstract.contract_df.copy()
 
-    rename_map = {
+    rename_map: RenameColumnsMapping = {
         "Letting Date": "letting_date",
         "Job Description": "description",
         "Contract Id": "id",
@@ -95,7 +98,7 @@ def test_rename_columns_on_contract_df_with_string_mapping() -> None:
 
     rename_columns = RenaneColumns(rename_map)
     renamed_df = rename_columns.apply(df)
-    result_column_names = renamed_df.columns.to_list()
+    result_column_names: list[str] = renamed_df.columns.to_list()
 
     expected_column_names = [
         "letting_date",
@@ -110,9 +113,9 @@ def test_rename_columns_on_contract_df_with_string_mapping() -> None:
 
 
 def test_rename_columns_on_item_df() -> None:
-    df = test_items.copy()
+    df = test_items.df.copy()
 
-    rename_map = {
+    rename_map: RenameColumnsMapping = {
         "Item Number": "id",
         "Short Description": "description",
         "Long Description": "long_description",
@@ -123,7 +126,7 @@ def test_rename_columns_on_item_df() -> None:
 
     rename_columns = RenaneColumns(rename_map)
     renamed_df = rename_columns.apply(df)
-    result_column_names = renamed_df.columns.to_list()
+    result_column_names: list[str] = renamed_df.columns.to_list()
 
     expected_column_names = [
         "id",
@@ -139,13 +142,13 @@ def test_rename_columns_on_item_df() -> None:
 
 
 def test_rename_columns_with_no_matches() -> None:
-    df = test_items.copy()
+    df = test_items.df.copy()
 
-    rename_map = {"NonMatchingText1": "nope"}
+    rename_map: RenameColumnsMapping = {"NonMatchingText1": "nope"}
 
     rename_columns = RenaneColumns(rename_map)
     renamed_df = rename_columns.apply(df)
-    result_column_names = renamed_df.columns.to_list()
+    result_column_names: list[str] = renamed_df.columns.to_list()
 
     expected_column_names = [
         "Item Number",

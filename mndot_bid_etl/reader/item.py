@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from pathlib import Path
-import pandas as pd
 
+import pandas as pd
 from mndot_bid_etl.dtype import DType
 
 
@@ -12,4 +12,5 @@ class ItemData:
 
 def create_item_data_from_csv(file: Path) -> ItemData:
     with open(file, "r") as f:
-        return pd.read_csv(f, dtype=DType.OBJECT.value, quotechar="'")
+        df = pd.read_csv(f, dtype=DType.OBJECT.value, quotechar="'")
+        return ItemData(df)

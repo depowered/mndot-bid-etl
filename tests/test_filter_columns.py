@@ -10,7 +10,7 @@ def test_filter_columns_on_bid_df() -> None:
 
     filter_columns = FilterColumns(filter_list)
     filtered_df = filter_columns.apply(df)
-    result_columns = filtered_df.columns.to_list()
+    result_columns: list[str] = filtered_df.columns.to_list()
 
     expected_columns = [
         "ItemNumber",
@@ -32,7 +32,7 @@ def test_filter_columns_on_bidder_df() -> None:
 
     filter_columns = FilterColumns(filter_list)
     filtered_df = filter_columns.apply(df)
-    result_columns = filtered_df.columns.to_list()
+    result_columns: list[str] = filtered_df.columns.to_list()
 
     expected_columns = ["Bidder Number", "Bidder Name"]
 
@@ -40,7 +40,7 @@ def test_filter_columns_on_bidder_df() -> None:
 
 
 def test_filter_columns_on_item_df() -> None:
-    df = test_items.copy()
+    df = test_items.df.copy()
 
     filter_list = [
         "Item Number",
@@ -53,7 +53,7 @@ def test_filter_columns_on_item_df() -> None:
 
     filter_columns = FilterColumns(filter_list)
     filtered_df = filter_columns.apply(df)
-    result_columns = filtered_df.columns.to_list()
+    result_columns: list[str] = filtered_df.columns.to_list()
 
     expected_columns = [
         "Item Number",
@@ -74,7 +74,7 @@ def test_filter_columns_with_no_matches() -> None:
 
     filter_columns = FilterColumns(filter_list)
     filtered_df = filter_columns.apply(df)
-    result_columns = filtered_df.columns.to_list()
+    result_columns: list[str] = filtered_df.columns.to_list()
 
     expected_columns = []
 

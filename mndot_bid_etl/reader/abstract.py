@@ -1,10 +1,10 @@
 import re
-import pandas as pd
 from dataclasses import dataclass
-from pathlib import Path
-from io import StringIO
 from datetime import date
+from io import StringIO
+from pathlib import Path
 
+import pandas as pd
 from mndot_bid_etl.dtype import DType
 
 
