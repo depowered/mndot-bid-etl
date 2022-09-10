@@ -1,5 +1,10 @@
 from mndot_bid_etl.transform.transformation import ModifyValues
-from mndot_bid_etl.transform import transform_bid
+from mndot_bid_etl.transform.recipes.bid import (
+    format_item_id,
+    format_long_description,
+    format_quantity,
+    format_price,
+)
 
 from tests import test_abstract
 
@@ -8,10 +13,10 @@ def test_modify_values_on_bid_df() -> None:
     df = test_abstract.bid_df.copy()
 
     fuzzy_modify_map = {
-        "ItemNumber": transform_bid.format_item_id,
-        "ItemDescription": transform_bid.format_long_description,
-        "Quantity": transform_bid.format_quantity,
-        "(Unit Price)": transform_bid.format_price,
+        "ItemNumber": format_item_id,
+        "ItemDescription": format_long_description,
+        "Quantity": format_quantity,
+        "(Unit Price)": format_price,
     }
 
     modify_values = ModifyValues(fuzzy_modify_map)
