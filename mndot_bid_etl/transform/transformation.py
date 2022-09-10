@@ -26,7 +26,7 @@ class RenaneColumns:
         rename_func : function that receives the existing column label and returns the renamed column label
     """
 
-    fuzzy_rename_map: dict[str, Callable[[str], str]]
+    fuzzy_rename_map: dict[str, str | Callable[[str], str]]
 
     def apply(self, df: pd.DataFrame) -> pd.DataFrame:
         # Initialized an empty columns dict of structure {old_column_name: new_column_name}
@@ -35,10 +35,13 @@ class RenaneColumns:
         # Iterate over each column of the input dataframe
         for column in df.columns.to_list():
             # Get the matching value from the fuzzy_rename_map
-            for search_string, func in self.fuzzy_rename_map.items():
-                if search_string in column:
+            for key, value in self.fuzzy_rename_map.items():
+                if key in column:
                     # Append the columns dict with the {old_column_name: new_column_name} pair
-                    columns[column] = func(column)
+                    if callable(value):
+                        columns[column] = value(column)
+                    else:
+                        columns[column] = value
 
         # Execture the df.rename() method
         return df.rename(columns=columns)

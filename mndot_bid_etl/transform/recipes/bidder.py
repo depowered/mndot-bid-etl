@@ -12,8 +12,8 @@ filter_columns = FilterColumns(fuzzy_filter_list=["Bidder Number", "Bidder Name"
 
 rename_columns = RenaneColumns(
     fuzzy_rename_map={
-        "Bidder Number": lambda _: "id",
-        "Bidder Name": lambda _: "name",
+        "Bidder Number": "id",
+        "Bidder Name": "name",
     }
 )
 

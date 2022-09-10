@@ -49,10 +49,10 @@ modify_values = ModifyValues(
 
 rename_columns = RenaneColumns(
     fuzzy_rename_map={
-        "ContractId": lambda _: "contract_id",
-        "ItemNumber": lambda _: "item_id",
-        "ItemDescription": lambda _: "long_description",
-        "Quantity": lambda _: "quantity",
+        "ContractId": "contract_id",
+        "ItemNumber": "item_id",
+        "ItemDescription": "long_description",
+        "Quantity": "quantity",
         "(Unit Price)": lambda x: x.strip().split(" ")[0].lower(),
     }
 )

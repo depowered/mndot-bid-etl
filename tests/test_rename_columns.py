@@ -7,8 +7,8 @@ def test_rename_columns_on_bid_df() -> None:
     df = test_abstract.bid_df.copy()
 
     rename_map = {
-        "ItemNumber": lambda _: "item_id",
-        "ItemDescription": lambda _: "long_description",
+        "ItemNumber": "item_id",
+        "ItemDescription": "long_description",
         "Quantity": lambda x: x.lower(),
         "(Unit Price)": lambda x: x.strip().split(" ")[0].lower(),
     }
@@ -42,7 +42,7 @@ def test_rename_columns_on_bid_df() -> None:
 def test_rename_columns_on_bidder_df() -> None:
     df = test_abstract.bidder_df.copy()
 
-    rename_map = {"Bidder Number": lambda _: "id", "Bidder Name": lambda _: "name"}
+    rename_map = {"Bidder Number": "id", "Bidder Name": "name"}
 
     rename_columns = RenaneColumns(rename_map)
     renamed_df = rename_columns.apply(df)
@@ -53,7 +53,7 @@ def test_rename_columns_on_bidder_df() -> None:
     assert result_column_names == expected_column_names
 
 
-def test_rename_columns_on_contract_df() -> None:
+def test_rename_columns_on_contract_df_with_functions() -> None:
     df = test_abstract.contract_df.copy()
 
     rename_map = {
@@ -81,16 +81,44 @@ def test_rename_columns_on_contract_df() -> None:
     assert result_column_names == expected_column_names
 
 
+def test_rename_columns_on_contract_df_with_string_mapping() -> None:
+    df = test_abstract.contract_df.copy()
+
+    rename_map = {
+        "Letting Date": "letting_date",
+        "Job Description": "description",
+        "Contract Id": "id",
+        "SP Number": "sp_number",
+        "District": "district",
+        "County": "county",
+    }
+
+    rename_columns = RenaneColumns(rename_map)
+    renamed_df = rename_columns.apply(df)
+    result_column_names = renamed_df.columns.to_list()
+
+    expected_column_names = [
+        "letting_date",
+        "description",
+        "id",
+        "sp_number",
+        "district",
+        "county",
+    ]
+
+    assert result_column_names == expected_column_names
+
+
 def test_rename_columns_on_item_df() -> None:
     df = test_items.copy()
 
     rename_map = {
-        "Item Number": lambda _: "id",
-        "Short Description": lambda _: "description",
-        "Long Description": lambda _: "long_description",
-        "Unit Name": lambda _: "unit",
-        "Plan Unit Description": lambda _: "unit_description",
-        "Spec Year": lambda _: "spec_year",
+        "Item Number": "id",
+        "Short Description": "description",
+        "Long Description": "long_description",
+        "Unit Name": "unit",
+        "Plan Unit Description": "unit_description",
+        "Spec Year": "spec_year",
     }
 
     rename_columns = RenaneColumns(rename_map)
@@ -113,7 +141,7 @@ def test_rename_columns_on_item_df() -> None:
 def test_rename_columns_with_no_matches() -> None:
     df = test_items.copy()
 
-    rename_map = {"NonMatchingText1": lambda _: None}
+    rename_map = {"NonMatchingText1": "nope"}
 
     rename_columns = RenaneColumns(rename_map)
     renamed_df = rename_columns.apply(df)

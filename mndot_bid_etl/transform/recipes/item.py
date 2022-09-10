@@ -31,12 +31,12 @@ filter_columns = FilterColumns(
 
 rename_columns = RenaneColumns(
     fuzzy_rename_map={
-        "Item Number": lambda _: "id",
-        "Short Description": lambda _: "description",
-        "Long Description": lambda _: "long_description",
-        "Unit Name": lambda _: "unit",
-        "Plan Unit Description": lambda _: "unit_description",
-        "Spec Year": lambda _: "spec_year",
+        "Item Number": "id",
+        "Short Description": "description",
+        "Long Description": "long_description",
+        "Unit Name": "unit",
+        "Plan Unit Description": "unit_description",
+        "Spec Year": "spec_year",
     }
 )
 

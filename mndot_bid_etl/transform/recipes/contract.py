@@ -9,12 +9,12 @@ from mndot_bid_etl.transform.transformation import (
 # ---------- Define Transformations ----------
 rename_columns = RenaneColumns(
     fuzzy_rename_map={
-        "Letting Date": lambda _: "letting_date",
-        "Job Description": lambda _: "description",
-        "Contract Id": lambda _: "id",
-        "SP Number": lambda _: "sp_number",
-        "District": lambda _: "district",
-        "County": lambda _: "county",
+        "Letting Date": "letting_date",
+        "Job Description": "description",
+        "Contract Id": "id",
+        "SP Number": "sp_number",
+        "District": "district",
+        "County": "county",
     }
 )
 
