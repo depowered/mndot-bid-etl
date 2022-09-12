@@ -2,7 +2,6 @@ from dataclasses import dataclass
 from typing import Any, Callable, Protocol
 
 import pandas as pd
-from mndot_bid_etl.dtype import DType
 
 TransformationFunction = Callable[[pd.DataFrame], pd.DataFrame]
 
@@ -12,7 +11,6 @@ class Transformation(Protocol):
 
     def apply(self, df: pd.DataFrame) -> pd.DataFrame:
         """Returns a transformed dataframe."""
-        ...
 
 
 RenameFunction = Callable[[str], str]

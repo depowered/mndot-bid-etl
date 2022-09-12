@@ -1,7 +1,7 @@
+from mndot_bid_etl.dtype import DType
 from mndot_bid_etl.transform.schema import ColumnSchema, TransformationSchema
 from mndot_bid_etl.transform.transformation import (
     CastColumns,
-    DType,
     FilterColumns,
     RenaneColumns,
 )
