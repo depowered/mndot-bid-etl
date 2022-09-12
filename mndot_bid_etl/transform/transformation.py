@@ -15,7 +15,8 @@ class Transformation(Protocol):
         ...
 
 
-RenameColumnsMapping = dict[str, str | Callable[[str], str]]
+RenameFunction = Callable[[str], str]
+RenameColumnsMapping = dict[str, str | RenameFunction]
 
 
 @dataclass
@@ -80,7 +81,7 @@ class FilterColumns:
         return df.filter(items=items)
 
 
-CastColumnsMapping = dict[str, DType]
+CastColumnsMapping = dict[str, str]
 
 
 @dataclass
@@ -113,7 +114,8 @@ class CastColumns:
         return df.astype(dtype=dtype)
 
 
-ModifyValuesMapping = dict[str, Callable[[Any], Any]]
+ModifyValuesFunction = Callable[[Any], Any]
+ModifyValuesMapping = dict[str, ModifyValuesFunction]
 
 
 @dataclass
