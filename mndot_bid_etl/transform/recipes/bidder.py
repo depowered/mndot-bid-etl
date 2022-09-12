@@ -1,3 +1,4 @@
+from mndot_bid_etl.transform.schema import ColumnSchema, TransformationSchema
 from mndot_bid_etl.transform.transformation import (
     CastColumns,
     DType,
@@ -6,22 +7,30 @@ from mndot_bid_etl.transform.transformation import (
 )
 from mndot_bid_etl.transform.transformer import Transformer
 
-# ---------- Define Transformations ----------
-filter_columns = FilterColumns(fuzzy_filter_list=["Bidder Number", "Bidder Name"])
-
-rename_columns = RenaneColumns(
-    fuzzy_rename_map={
-        "Bidder Number": "id",
-        "Bidder Name": "name",
-    }
+# ---------- Define Transformation Schema ----------
+bidder_transformation_schema = TransformationSchema(
+    [
+        ColumnSchema(
+            name="id",
+            dtype=DType.STRING,
+            source_column_search_string="Bidder Number",
+        ),
+        ColumnSchema(
+            name="name", dtype=DType.STRING, source_column_search_string="Bidder Name"
+        ),
+    ]
 )
 
-cast_columns = CastColumns(
-    fuzzy_dtype_map={
-        "id": DType.STRING,
-        "name": DType.STRING,
-    }
+# ---------- Create Transformations ----------
+filter_columns = FilterColumns(
+    bidder_transformation_schema.get_filter_columns_list(
+        use_source_column_search_string=True
+    )
 )
+
+rename_columns = RenaneColumns(bidder_transformation_schema.get_rename_columns_map())
+
+cast_columns = CastColumns(bidder_transformation_schema.get_cast_columns_map())
 
 
 # ---------- Construct Transformer ----------
