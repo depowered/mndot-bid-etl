@@ -59,48 +59,13 @@ filter_columns = FilterColumns(
     item_transformation_schema.get_filter_columns_list(
         use_source_column_search_string=True
     )
-    # fuzzy_filter_list=[
-    #     "Item Number",
-    #     "Short Description",
-    #     "Long Description",
-    #     "Unit Name",
-    #     "Plan Unit Description",
-    #     "Spec Year",
-    # ]
 )
 
-rename_columns = RenaneColumns(
-    item_transformation_schema.get_rename_columns_map()
-    # fuzzy_rename_map={
-    #     "Item Number": "id",
-    #     "Short Description": "description",
-    #     "Long Description": "long_description",
-    #     "Unit Name": "unit",
-    #     "Plan Unit Description": "unit_description",
-    #     "Spec Year": "spec_year",
-    # }
-)
+rename_columns = RenaneColumns(item_transformation_schema.get_rename_columns_map())
 
-modify_values = ModifyValues(
-    item_transformation_schema.get_modify_values_map()
-    # fuzzy_modify_map={
-    #     "description": format_description,
-    #     "long_description": format_description,
-    #     "spec_year": format_spec_year,
-    # }
-)
+modify_values = ModifyValues(item_transformation_schema.get_modify_values_map())
 
-cast_columns = CastColumns(
-    item_transformation_schema.get_cast_columns_map()
-    # fuzzy_dtype_map={
-    #     "id": DType.STRING,
-    #     "description": DType.STRING,
-    #     "long_description": DType.STRING,
-    #     "unit": DType.STRING,
-    #     "unit_description": DType.STRING,
-    #     "spec_year": DType.STRING,
-    # }
-)
+cast_columns = CastColumns(item_transformation_schema.get_cast_columns_map())
 
 
 # ---------- Construct Transformer ----------
