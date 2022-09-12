@@ -98,7 +98,7 @@ class CastColumns:
     fuzzy_dtype_map: CastColumnsMapping
 
     def apply(self, df: pd.DataFrame) -> pd.DataFrame:
-        # Intialize an empty dtype dict of structure {column_label: DType.value}
+        # Intialize an empty dtype dict of structure {column_label: DType}
         dtype = {}
 
         # Iterate over each column of the input dataframe
@@ -106,8 +106,8 @@ class CastColumns:
             # Get the matching value from the fuzzy_dtype_map
             for search_string, destination_dtype in self.fuzzy_dtype_map.items():
                 if search_string in column:
-                    # Append the dtype dict with the {column_label: DType.value} pair
-                    dtype[column] = destination_dtype.value
+                    # Append the dtype dict with the {column_label: DType} pair
+                    dtype[column] = destination_dtype
 
         # Execute the df.astype() method
         return df.astype(dtype=dtype)
