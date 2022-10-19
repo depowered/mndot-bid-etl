@@ -12,5 +12,5 @@ class ItemData:
 
 def create_item_data_from_csv(file: Path) -> ItemData:
     with open(file, "r") as f:
-        df = pd.read_csv(f, dtype=DType.OBJECT, quotechar="'")
+        df = pd.read_csv(f, dtype=DType.STRING, quotechar="'")
         return ItemData(df)
