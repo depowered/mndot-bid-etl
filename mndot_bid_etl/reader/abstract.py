@@ -43,7 +43,7 @@ def create_abstract_data_from_csv(file: Path) -> AbstractData:
     contract_data, bid_data, bidder_data = split_csv(file)
 
     contract_df = pd.read_csv(
-        StringIO(contract_data), dtype=DType.OBJECT, escapechar="\\"
+        StringIO(contract_data), dtype=DType.STRING, escapechar="\\"
     )
 
     bid_df = pd.read_csv(StringIO(bid_data), dtype=DType.OBJECT, escapechar="\\")
