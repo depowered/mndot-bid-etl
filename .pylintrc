@@ -1,5 +1,5 @@
 [MASTER]
 docstring-min-length=10
-disable=missing-function-docstring,missing-class-docstring,missing-module-docstring
+disable=missing-function-docstring,missing-class-docstring,missing-module-docstring,import-error
 [FORMAT]
 good-names=i,j,x,y,id,df
