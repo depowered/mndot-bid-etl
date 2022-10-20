@@ -46,7 +46,7 @@ def create_abstract_data_from_csv(file: Path) -> AbstractData:
         StringIO(contract_data), dtype=DType.STRING, escapechar="\\"
     )
 
-    bid_df = pd.read_csv(StringIO(bid_data), dtype=DType.OBJECT, escapechar="\\")
+    bid_df = pd.read_csv(StringIO(bid_data), dtype=DType.STRING, escapechar="\\")
 
     bidder_df = pd.read_csv(StringIO(bidder_data), dtype=DType.STRING, escapechar="\\")
 
