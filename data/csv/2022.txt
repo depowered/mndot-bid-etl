@@ -1,0 +1,107 @@
+Contract id: 210120, Spec Year: 2018
+Contract id: 220001, Spec Year: 2020
+Contract id: 220002, Spec Year: 2018
+Contract id: 220003, Spec Year: 2020
+Contract id: 220004, Spec Year: 2020
+Contract id: 220005, Spec Year: {'item_count': 53, '2016_matches': 8, '2018_matches': 48, '2020_matches': 52}
+Contract id: 220006, Spec Year: 2020
+Contract id: 220007, Spec Year: 2020
+Contract id: 220008, Spec Year: 2020
+Contract id: 220009, Spec Year: 2018
+Contract id: 220010, Spec Year: 2020
+Contract id: 220011, Spec Year: {'item_count': 84, '2016_matches': 9, '2018_matches': 79, '2020_matches': 83}
+Contract id: 220012, Spec Year: 2020
+Contract id: 220013, Spec Year: 2020
+Contract id: 220014, Spec Year: 2020
+Contract id: 220015, Spec Year: 2018
+Contract id: 220016, Spec Year: 2020
+Contract id: 220017, Spec Year: 2020
+Contract id: 220018, Spec Year: {'item_count': 156, '2016_matches': 18, '2018_matches': 141, '2020_matches': 155}
+Contract id: 220019, Spec Year: 2020
+Contract id: 220020, Spec Year: {'item_count': 90, '2016_matches': 13, '2018_matches': 78, '2020_matches': 89}
+Contract id: 220021, Spec Year: {'item_count': 94, '2016_matches': 18, '2018_matches': 84, '2020_matches': 93}
+Contract id: 220022, Spec Year: 2018
+Contract id: 220023, Spec Year: 2020
+Contract id: 220024, Spec Year: 2020
+Contract id: 220026, Spec Year: 2020
+Contract id: 220027, Spec Year: 2020
+Contract id: 220028, Spec Year: 2020
+Contract id: 220029, Spec Year: 2020
+Contract id: 220030, Spec Year: 2020
+Contract id: 220031, Spec Year: 2020
+Contract id: 220032, Spec Year: 2020
+Contract id: 220033, Spec Year: 2020
+Contract id: 220034, Spec Year: {'item_count': 285, '2016_matches': 36, '2018_matches': 271, '2020_matches': 284}
+Contract id: 220035, Spec Year: 2020
+Contract id: 220036, Spec Year: 2020
+Contract id: 220037, Spec Year: {'item_count': 203, '2016_matches': 23, '2018_matches': 189, '2020_matches': 202}
+Contract id: 220038, Spec Year: 2020
+Contract id: 220039, Spec Year: 2020
+Contract id: 220040, Spec Year: {'item_count': 155, '2016_matches': 18, '2018_matches': 142, '2020_matches': 154}
+Contract id: 220041, Spec Year: 2020
+Contract id: 220042, Spec Year: {'item_count': 157, '2016_matches': 15, '2018_matches': 145, '2020_matches': 156}
+Contract id: 220043, Spec Year: 2020
+Contract id: 220044, Spec Year: {'item_count': 61, '2016_matches': 7, '2018_matches': 58, '2020_matches': 60}
+Contract id: 220045, Spec Year: 2020
+Contract id: 220047, Spec Year: 2020
+Contract id: 220048, Spec Year: 2020
+Contract id: 220049, Spec Year: 2020
+Contract id: 220050, Spec Year: {'item_count': 172, '2016_matches': 18, '2018_matches': 159, '2020_matches': 171}
+Contract id: 220051, Spec Year: 2020
+Contract id: 220052, Spec Year: 2020
+Contract id: 220053, Spec Year: 2020
+Contract id: 220054, Spec Year: 2020
+Contract id: 220055, Spec Year: 2020
+Contract id: 220056, Spec Year: {'item_count': 79, '2016_matches': 12, '2018_matches': 74, '2020_matches': 78}
+Contract id: 220057, Spec Year: 2020
+Contract id: 220058, Spec Year: 2016
+Contract id: 220059, Spec Year: 2020
+Contract id: 220060, Spec Year: 2016
+Contract id: 220061, Spec Year: {'item_count': 98, '2016_matches': 12, '2018_matches': 90, '2020_matches': 97}
+Contract id: 220062, Spec Year: 2020
+Contract id: 220063, Spec Year: 2020
+Contract id: 220064, Spec Year: 2018
+Contract id: 220065, Spec Year: 2020
+Contract id: 220066, Spec Year: 2020
+Contract id: 220067, Spec Year: {'item_count': 37, '2016_matches': 16, '2018_matches': 36, '2020_matches': 36}
+Contract id: 220068, Spec Year: 2020
+Contract id: 220069, Spec Year: 2020
+Contract id: 220070, Spec Year: 2020
+Contract id: 220071, Spec Year: 2020
+Contract id: 220072, Spec Year: 2020
+Contract id: 220073, Spec Year: 2020
+Contract id: 220074, Spec Year: 2020
+Contract id: 220075, Spec Year: 2020
+Contract id: 220076, Spec Year: 2020
+Exception occured processing path: /workspaces/mndot-bid-etl/data/csv/2022/220077.csv
+Contract id: 220078, Spec Year: 2020
+Contract id: 220079, Spec Year: 2020
+Contract id: 220080, Spec Year: {'item_count': 10, '2016_matches': 2, '2018_matches': 9, '2020_matches': 9}
+Contract id: 220081, Spec Year: 2020
+Contract id: 220082, Spec Year: 2020
+Contract id: 220083, Spec Year: 2020
+Contract id: 220084, Spec Year: 2020
+Contract id: 220085, Spec Year: 2020
+Contract id: 220086, Spec Year: 2020
+Contract id: 220087, Spec Year: 2020
+Contract id: 220089, Spec Year: 2020
+Contract id: 220090, Spec Year: 2018
+Contract id: 220091, Spec Year: 2020
+Contract id: 220092, Spec Year: 2018
+Contract id: 220096, Spec Year: 2020
+Contract id: 220099, Spec Year: 2020
+Contract id: 220100, Spec Year: 2020
+Contract id: 220106, Spec Year: 2020
+Contract id: 220501, Spec Year: 2018
+Contract id: 220601, Spec Year: 2018
+Contract id: 220602, Spec Year: 2020
+Contract id: 220603, Spec Year: 2020
+Contract id: 220604, Spec Year: 2016
+Contract id: 220605, Spec Year: 2018
+Contract id: 220607, Spec Year: 2018
+Contract id: 220801, Spec Year: 2020
+Exception occured processing path: /workspaces/mndot-bid-etl/data/csv/2022/220802.csv
+Exception occured processing path: /workspaces/mndot-bid-etl/data/csv/2022/220803.csv
+Contract id: 220804, Spec Year: 2018
+Exception occured processing path: /workspaces/mndot-bid-etl/data/csv/2022/220805.csv
+Contract id: 220901, Spec Year: {'item_count': 79, '2016_matches': 14, '2018_matches': 72, '2020_matches': 78}
